@@ -1,5 +1,6 @@
 # CoffeeHub
 
+```plaintext
 CoffeeHub/
 ├── public/                     # Chứa các tệp tĩnh như favicon, hình ảnh...
 ├── src/
@@ -14,10 +15,11 @@ CoffeeHub/
 │   ├── main.tsx                # Điểm khởi chạy ứng dụng, render React vào DOM
 │   ├── vite-env.d.ts           # Khai báo môi trường cho Vite
 ├── .gitignore                  # Định nghĩa các file/thư mục bị bỏ qua khi commit
-├── eslint.config.js             # Cấu hình ESLint để kiểm tra code
+├── eslint.config.js            # Cấu hình ESLint để kiểm tra code
 ├── index.html                  # File HTML chính, chứa root #app
 ├── package.json                # Khai báo dependencies và scripts
 ├── package-lock.json           # Lock version dependencies
 ├── README.md                   # Mô tả project và hướng dẫn sử dụng
-├── tsconfig.json                # Cấu hình TypeScript
-└── vite.config.ts               # Cấu hình Vite cho dự án
+├── tsconfig.json               # Cấu hình TypeScript
+└── vite.config.ts              # Cấu hình Vite cho dự án
+```
