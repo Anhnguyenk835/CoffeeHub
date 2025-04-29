@@ -1,35 +1,32 @@
+require('dotenv').config({ path: '/.env' });
+
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
 
-dotenv.config();
+// import routes
+const placeRoute = require('./routes/placeRoute');
+const placeTypeRoute = require('./routes/placeTypeRoute');
 
+// init app
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // middleware
 app.use(cors());
 app.use(express.json());
 
+// apply routes
+app.use('/api/places', placeRoute);
+app.use('/api/place-types', placeTypeRoute);
 
-// testing route
+// root route
 app.get('/', (req, res) => {
-  res.json({
-    message: 'Hello from the CoffeeHub backend!',
-  });
+    res.json({
+        message: 'Server is running',
+    });
 });
 
-// routes
-const testRoute = require('./routes/test');
-const databaseRoutes = require('./routes/database');
-const placeRoute = require('./routes/place');
-
-// use route
-app.use('/api', testRoute);
-app.use('/api/database', databaseRoutes);
-app.use('/api/places', placeRoute);
-
-// port
-const PORT = process.env.PORT || 3000;
+// start server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
