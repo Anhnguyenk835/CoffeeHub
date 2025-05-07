@@ -4,8 +4,7 @@ const express = require('express');
 const cors = require('cors');
 
 // import routes
-const placeRoute = require('./routes/placeRoute');
-const placeTypeRoute = require('./routes/placeTypeRoute');
+const placeRoute = require('./routes/cfShopRoute');
 
 // init app
 const app = express();
@@ -17,7 +16,6 @@ app.use(express.json());
 
 // apply routes
 app.use('/api/places', placeRoute);
-app.use('/api/place-types', placeTypeRoute);
 
 // root route
 app.get('/', (req, res) => {

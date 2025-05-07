@@ -1,6 +1,6 @@
 const express = require('express');
 const Router = express.Router();
-const placeControllers = require('../controllers/placeController');
+const placeControllers = require('../controllers/Cf_Shop_Controller');
 
 // get all place
 Router.get('/', placeControllers.getAllPlaces);

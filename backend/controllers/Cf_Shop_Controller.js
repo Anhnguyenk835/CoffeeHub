@@ -1,4 +1,4 @@
-const place = require('../database/models/Place');
+const place = require('../database/models/cf_shop');
 
 // get all places
 const getAllPlaces = async (req, res) => {
@@ -33,17 +33,17 @@ const addPlace = async (req, res) => {
         const { placeData, error } = await place.addPlace(newPlace);
         if (error) {
             // Check same value
-            if (error.message.includes('Place already exists')) {
+            if (error.message.includes('Cf Shop already exists')) {
                 return res.status(400).json({
                     success: false,
-                    message: 'Place already existed.',
+                    message: 'Cf shop already existed.',
                 });
             }
             throw error;
         }
         res.status(201).json(placeData);
     } catch (error) {
-        console.error('Error adding place in controllers:', error);
+        console.error('Error adding cf shop in controllers:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 };
@@ -55,11 +55,11 @@ const updatePlace = async (req, res) => {
     try {
         const placeData = await place.updatePlace(placeId, updatedPlace);
         if (!placeData) {
-            return res.status(404).json({ error: 'Place not found' });
+            return res.status(404).json({ error: 'Cf shop not found' });
         }
         res.status(200).json(placeData);
     } catch (error) {
-        console.error('Error updating place in controllers:', error);
+        console.error('Error updating coffee shop in controllers:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 };
@@ -70,11 +70,11 @@ const deletePlace = async (req, res) => {
     try {
         const deletedPlace = await place.deletePlace(placeId);
         if (!deletedPlace) {
-            return res.status(404).json({ error: 'Place not found' });
+            return res.status(404).json({ error: 'Coffee shop not found' });
         }
         res.status(204).send();
     } catch (error) {
-        console.error('Error deleting place in controllers:', error);
+        console.error('Error deleting Coffee shop in controllers:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 };
