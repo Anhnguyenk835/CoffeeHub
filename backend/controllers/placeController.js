@@ -30,7 +30,17 @@ const getPlaceById = async (req, res) => {
 const addPlace = async (req, res) => {
     const newPlace = req.body;
     try {
-        const placeData = await place.addPlace(newPlace);
+        const { placeData, error } = await place.addPlace(newPlace);
+        if (error) {
+            // Check same value
+            if (error.message.includes('Place already exists')) {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Place already existed.',
+                });
+            }
+            throw error;
+        }
         res.status(201).json(placeData);
     } catch (error) {
         console.error('Error adding place in controllers:', error);
