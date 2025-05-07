@@ -13,6 +13,16 @@ class Place {
 
     // add new place 
     static async addPlace(place) {
+        // Check if the place already exists
+        const existingPlace = await db('Place')
+            .where({ place_url: place.place_url })
+            .first();
+        if (existingPlace) {
+            return {
+                placeData: existingPlace,
+                error: new Error('Place already exists'),
+            };
+        }
         const [newPlace] = await db('Place').insert(place).returning('*');
         return newPlace;
     }
