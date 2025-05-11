@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import 'tw-animate-css';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +12,7 @@ body {
   padding: 0;
   font-family: 'Inter', sans-serif;
   font-size: 15px;
-  background-color: #F9FAFB;
+  background-color: white;
   color: black;
   box-sizing: border-box;
 }

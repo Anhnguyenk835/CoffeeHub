@@ -9,26 +9,32 @@ exports.up = async function (knex) {
         return knex.schema.hasTable(tableName);
     };
 
+    // Create Coffee_Shop table if it doesn't exist
     if (!(await tableExists('Coffee_Shop'))) {
         await knex.schema.createTable('Coffee_Shop', (table) => schema.coffeeSchema.Coffee_Shop(table, knex));
     }
     
+    // Create Coffee_Extension table if it doesn't exist
     if (!(await tableExists('Coffee_Extension'))) {
         await knex.schema.createTable('Coffee_Extension', (table) => schema.coffeeSchema.Coffee_Extension(table, knex));
     }
-       
+    
+    // Create Coffee_Rating table if it doesn't exist
     if (!(await tableExists('Coffee_Rating'))) {
         await knex.schema.createTable('Coffee_Rating', (table) => schema.coffeeSchema.Coffee_Rating(table, knex));
     }
     
+    // Create Coffee_Image table if it doesn't exist
     if (!(await tableExists('Coffee_Image'))) {
         await knex.schema.createTable('Coffee_Image', (table) => schema.coffeeSchema.Coffee_Image(table, knex));
     }
     
+    // Create Coffee_Opening_Hours table if it doesn't exist
     if (!(await tableExists('Coffee_Opening_Hours'))) {
         await knex.schema.createTable('Coffee_Opening_Hours', (table) => schema.coffeeSchema.Coffee_Opening_Hours(table, knex));
     }
 
+    // Check if function exists before creating it
     const functionExists = await knex.raw(`
         SELECT 1 FROM pg_proc WHERE proname = 'update_timestamp'
     `);
@@ -45,6 +51,7 @@ exports.up = async function (knex) {
         `);
     }
 
+    // ADD TRIGGER only if it doesn't exist
     const tables = ['Coffee_Shop', 'Coffee_Extension', 'Coffee_Rating', 'Coffee_Image', 'Coffee_Opening_Hours'];
     for (const table of tables) {
         const triggerExists = await knex.raw(`

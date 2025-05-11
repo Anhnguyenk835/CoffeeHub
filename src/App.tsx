@@ -1,23 +1,37 @@
-import React, {lazy, Suspense} from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React, { Suspense, lazy, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 const Home = lazy(() => import('./pages/Home/home'));
-const About = lazy(() => import('./pages/About/about'));
-const Login = lazy(() => import('./pages/Login/login'));
-const ResetPassword = lazy(() => import('./pages/Login/reset-password'));
-const Register = lazy(() => import('./pages/Login/register'));
+const DetailPage = lazy(() => import('./pages/Detail/detail'));
+
+const LoadingFallback = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+  </div>
+);
+
+const NavigationHandler = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const hasSeenLanding = localStorage.getItem('hasSeenLanding');
+    if (location.pathname === '/' && hasSeenLanding === 'true') {
+      navigate('/home');
+    }
+  }, [location, navigate]);
+
+  return null;
+};
 
 const App: React.FC = () => {
   return (
-    <Router>  
-      <Suspense fallback={<div className="flex items-center justify-center h-screen">Loading...</div>}>
+    <Router>
+      <Suspense fallback={<LoadingFallback />}>
+        <NavigationHandler />
         <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/detail/:id" element={<DetailPage />} />
         </Routes>
       </Suspense>
     </Router>
