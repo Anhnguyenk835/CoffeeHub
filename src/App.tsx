@@ -7,7 +7,7 @@ const Login = lazy(() => import('./pages/Login/login'));
 const ResetPassword = lazy(() => import('./pages/Login/reset-password'));
 const Register = lazy(() => import('./pages/Login/register'));
 const Favorites = lazy(() => import('./pages/Favorites/favorites'));
-const FavoriteList = lazy(() => import('./pages/Favorites/favorite-list'));
+const FavoritesList = lazy(() => import('./pages/Favorites/favorites-list'));
 
 const App: React.FC = () => {
   return (
@@ -21,7 +21,7 @@ const App: React.FC = () => {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/register" element={<Register />} />
           <Route path="/favorites" element={<Favorites />} />
-          <Route path="/favorite-list" element={<FavoriteList />} />
+          <Route path="/favorites/list" element={<FavoritesList />} />
         </Routes>
       </Suspense>
     </Router>

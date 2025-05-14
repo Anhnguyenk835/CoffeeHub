@@ -5,20 +5,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { List, ChevronRight, Coffee } from "lucide-react"
 
 const Favorites: React.FC = () => {
-    const navigate = useNavigate();
-
-    const handleViewDetails = (id: number) => {
-
-    }
     
+
     return (
         <div className='flex min-h-screen bg-[#F9FAFB]'>
             <Sidebar />
 
             <main className='flex-1 p-6 overflow-auto'>
-                <div className='flex justify-end w-full'>
-                    <button className='bg-[#ADC178] rounded-full text-white font-medium py-3 px-6 active:scale-[.98] hover:scale-[1.01] shadow-md'>Create new list</button>
-                </div>
+                <CreateListButton />
 
                 <div className='mx-auto mt-6'>
                     <h1 className="text-3xl font-extrabold text-center my-2">Your Favorite Coffee Spots</h1>
@@ -29,7 +23,7 @@ const Favorites: React.FC = () => {
                             name='Chạy deadline'
                             nShops={5}
                             hasThumbnail={true}
-                            thumbnail='/images/trung-nguyen.png'
+                            thumbnail='/images/the-coffee-house.png'
 
                         />
 
@@ -78,7 +72,7 @@ interface ListProps {
 
 const ListCard: React.FC<ListProps> = ({ name, nShops, hasThumbnail, thumbnail }) => {
   return (
-    <Link to='/favorite-list' className='bg-white shadow-sm rounded-3xl h-full border border-[#d9d9d9] overflow-hidden'>
+    <Link to='/favorites/list' className='bg-white shadow-sm rounded-3xl h-full border border-[#d9d9d9] overflow-hidden'>
         {hasThumbnail ? (
             <div className="h-48 relative">
                 <img src={thumbnail} alt={name} className="w-full h-full object-cover" />
@@ -119,3 +113,69 @@ const ListCard: React.FC<ListProps> = ({ name, nShops, hasThumbnail, thumbnail }
     </Link>
   );
 };
+
+const CreateListButton: React.FC = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [listName, setListName] = useState('');
+
+    const handleConfirm = () => {
+        console.log('New List:', listName);
+        // send list name back to db
+        setIsModalOpen(false);
+        setListName('');
+    }
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+        setListName('');
+    }
+
+    return (
+        <div className='flex justify-end w-full'>
+            <button 
+                onClick={() => setIsModalOpen(true)}
+                className='bg-[#ADC178] rounded-full text-white font-medium py-3 px-6 active:scale-[.98] hover:scale-[1.01] shadow-md'
+            >
+
+                Create new list
+            </button>
+
+            {isModalOpen && (
+                <div className='fixed inset-0 bg-black/40 flex justify-center items-center z-50'>
+                    <div className='bg-white rounded-2xl shadow-lg p-6 w-80 space-y-4'>
+                        <h2 className='text-center text-lg font-bold'>Enter list name</h2>
+                        <input 
+                            type='text'
+                            value={listName}
+                            onChange={(e) => setListName(e.target.value)}
+                            className='w-full border rounded-md px-3 py-2'
+                            placeholder='e.g. Cafe Q5'
+                        />
+
+                        <div className='flex justify-center space-x-4'>
+                            <button
+                                onClick={handleConfirm}
+                                className='px-4 py-2 bg-[#ADC178] text-white rounded-md hover:bg-[#99ab6a] text-sm'
+                            >
+                                Confirm
+                            </button>
+
+                            <button
+                                onClick={handleCancel}
+                                className='px-4 py-2 bg-[#6C584C]/60 text-white rounded-md hover:bg-[#52433a]/60 text-sm'
+                            >
+                                Cancel
+                            </button>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            )}
+        </div>
+    );
+}

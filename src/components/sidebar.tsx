@@ -13,7 +13,7 @@ export default function Sidebar() {
 
       <nav className="space-y-4">
         <NavItem href="/home" icon={<Home size={20} />} label="Home" active={location.pathname === "/home"} />
-        <NavItem href="/favorites" icon={<Heart size={20} />} label="Favorites" active={location.pathname === "/favorites"} />
+        <NavItem href="/favorites" icon={<Heart size={20} />} label="Favorites" active={location.pathname.startsWith("/favorites")} />
         <NavItem href="/about" icon={<Info size={20} />} label="About" active={location.pathname === "/about"} />
         <NavItem href="/login" icon={<User size={20} />} label="Log in" active={location.pathname === "/login"} />
       </nav>
