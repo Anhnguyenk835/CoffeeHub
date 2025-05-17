@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/sidebar';
 import { Link, useNavigate } from 'react-router-dom';
+// import { getPlaces, CoffeeShop } from '../../'
 
 import { ExternalLink, MapPin, Phone, Clock, Star } from "lucide-react"
 
@@ -51,6 +52,7 @@ const FavoritesList: React.FC = () => {
     const [description, setDescription] = useState('Type in your description');
     const [isEditing, setIsEditing] = useState(false);
 
+    const [coffeeShops, setCoffeeShops] = useState<ListItemProps[]>([]);
     const handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDescription(event.target.value)
     }
@@ -72,6 +74,17 @@ const FavoritesList: React.FC = () => {
     const handleBack = () => {
         navigate('../favorites')
     }
+
+    // get shops data
+    // useEffect(() => {
+    //     const fetchCoffeeShops = async () => {
+    //         try {
+    //             const data = await getPlaces();
+    //             setCoffeeShops(data);
+    //         }
+    //     }
+    // }
+    // );
 
     return (
         <div className='flex min-h-screen bg-[#F9FAFB]'>
