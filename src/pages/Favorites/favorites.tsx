@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../../components/sidebar';
 import { Link, useNavigate } from 'react-router-dom';
-
 import { List, ChevronRight, Coffee } from "lucide-react"
 
 const Favorites: React.FC = () => {
-    
-
     return (
         <div className='flex min-h-screen bg-[#F9FAFB]'>
             <Sidebar />
